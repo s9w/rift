@@ -1,5 +1,6 @@
 # rift (Recursively Include Text Files)
 This little program recursively replaces include statements in text files with the contents of that file. It was written as a Markdown helper but is completely format-agnostic.
+
 ![](animation.gif)
 
 The inclusions are done in the current **working directory**. The exact same file and directory structure is being written to an output directory of your choice, which must be specified with `--out_path`. Example use:
