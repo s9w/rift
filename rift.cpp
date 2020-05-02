@@ -20,6 +20,8 @@ namespace {
 		const std::string_view& s,
 		const std::string_view& delimiter
 	) -> std::vector<std::string> {
+		if (s.empty())
+			return {};
 		std::vector<std::string> parts;
 		size_t start = 0U;
 		auto end = s.find(delimiter);
@@ -107,7 +109,7 @@ namespace {
 	{
 		std::map<fs::path, std::string> contents;
 		for (const auto& dir_entry : fs::recursive_directory_iterator(fs::current_path())) {
-			if(is_suitable_file(dir_entry, valid_extensions))
+			if(!is_suitable_file(dir_entry, valid_extensions))
 				continue;
 			const fs::path relative_path = fs::relative(dir_entry.path());
 			const std::optional<std::string> file_contents = get_file_contents(dir_entry);
