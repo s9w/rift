@@ -128,7 +128,7 @@ namespace rift {
 		const fs::path& input_file,
 		const std::string& contents
 	) -> void {
-		fs::path output_file = fs::current_path().parent_path() / output_dir_str / input_file;
+		fs::path output_file = fs::current_path() / output_dir_str / input_file;
 		::write_file(output_file, contents);
 	}
 
