@@ -17,6 +17,8 @@ By default, the regular expression for the include statements is `#include \"([\
 
 The includes happen recursively, so it'll happily try to resolve two files including each other. To put and end to such sillyness, there is a default inclusion depth. Its default is `5`, but you can overwrite it with `--max_depth n`.
 
+The files that are being processed can be filtered by their extension. The parameter `--ext=md,txt` sets a comma separated list of valid extensions. All files that don't match get ignored and are neither valid sources nor targets of inclusion. They also don't get copied over to the output directory. By default this filter is empty, meaning no filtering is done.
+
 rift does not understand *any* format specifics so you can't comment out or the include commands.
 
 
