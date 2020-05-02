@@ -45,7 +45,6 @@ namespace rift {
 			const fs::path& output_file,
 			const std::string& contents
 		) -> void {
-
 			create_dirs_for_file(output_file);
 
 			std::ofstream filestream(output_file);
@@ -164,15 +163,8 @@ namespace rift {
 		}
 
 		// Write them into out dir
-		for (const auto& [input_file, content] : output_contents) {
-			try{
-				file_tools::write_file(output_dir_str, input_file, content);
-			}
-			catch (const std::runtime_error& e){
-				std::cerr << "Error while writing \"" << input_file.string() << "\": " << e.what() << std::endl;
-			}
-			
-		}
+		for (const auto& [input_file, content] : output_contents)
+			file_tools::write_file(output_dir_str, input_file, content);
 	}
 
 } // namespace rift
@@ -181,7 +173,7 @@ namespace rift {
 auto main(const int argc, char** argv) -> int {
 	CLI::App app{ "Recursively Include Text Files RIFT" };
 
-	std::string output_dir = "";
+	std::string output_dir;
 	std::string regex_str = R"(#include \"([\w.\/%]*)\")";
 	int max_inclusion_depth = 5;
 	app.add_option("-o,--out_path", output_dir, "output directory")->required();
