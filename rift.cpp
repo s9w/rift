@@ -130,7 +130,7 @@ namespace rift {
 		const fs::path& input_file,
 		const std::string& contents
 	) -> void {
-		fs::path output_file = fs::current_path() / output_dir_str / input_file;
+		const fs::path output_file = fs::current_path() / output_dir_str / input_file;
 		::write_file(output_file, contents);
 	}
 
@@ -148,12 +148,12 @@ namespace rift {
 		const std::string& regex_str
 	) -> IncludeResult {
 		std::regex rx(regex_str);
-		auto words_begin = std::sregex_iterator(content.begin(), content.end(), rx);
-		auto words_end = std::sregex_iterator();
+		const auto begin = std::sregex_iterator(content.begin(), content.end(), rx);
+		const auto end = std::sregex_iterator();
 
 		IncludeResult result;
 		std::string rest = content;
-		for (std::sregex_iterator it = words_begin; it != words_end; ++it) {
+		for (std::sregex_iterator it = begin; it != end; ++it) {
 			result.new_content += it->prefix();
 			if (it->size() < 2) {
 				std::cerr << "regex doesn't include capture group" << std::endl;
@@ -193,7 +193,6 @@ namespace rift {
 	}
 
 
-	// iteration limit is not properly implemented
 	auto rift(
 		const std::string& output_dir_str, 
 		const int max_inclusion_depth,
